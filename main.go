@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/jkhf/go_project/internal/app"
-	"github.com/jkhf/go_project/internal/app/routes"
+	"github.com/jkhf/go_project/internal/routes"
 )
 
 // panic is a self-destructive function that stops the program and prints the error message
