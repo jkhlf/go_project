@@ -7,18 +7,28 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/jkhf/go_project/internal/api"
 )
 
 type Application struct {
-	Logger *log.Logger
+	Logger         *log.Logger
+	WorkoutHandler *api.WorkoutHandler
 }
 
 // Pointer to the Application and error type, nil is error type
 func NewApplication() (*Application, error) {
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
+	//stores will go here
+
+	//handlers will go here
+
+	workoutHandler := api.NewWorkoutHandler()
+
 	app := &Application{
-		Logger: logger,
+		Logger:         logger,
+		WorkoutHandler: workoutHandler,
 	}
 
 	return app, nil

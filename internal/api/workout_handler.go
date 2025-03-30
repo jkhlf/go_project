@@ -3,6 +3,8 @@ package api
 import (
 	"net/http"
 
+	"fmt"
+
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
@@ -28,4 +30,9 @@ func (wh *WorkoutHandler) HandleGetWorkoutByID(w http.ResponseWriter, r *http.Re
 		return
 	}
 
+	fmt.Fprint(w, "Get workout by ID: ", workoutID)
+}
+
+func (wh *WorkoutHandler) HandleGetWorkout(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "created a workout\n")
 }
