@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/jkhf/go_project/internal/api"
+	"github.com/jkhf/go_project/internal/store"
 )
 
 type Application struct {
@@ -18,6 +19,11 @@ type Application struct {
 
 // Pointer to the Application and error type, nil is error type
 func NewApplication() (*Application, error) {
+	pgDB, err := store.Open()
+	if err != nil {
+		return nil, err
+	}
+
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
 	//stores will go here
