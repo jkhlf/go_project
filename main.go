@@ -10,6 +10,9 @@ import (
 	"github.com/jkhf/go_project/internal/routes"
 )
 
+//go get -> bring the package
+// go install -> same npm install
+
 // panic is a self-destructive function that stops the program and prints the error message
 func main() {
 
@@ -21,6 +24,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer app.DB.Close()
 
 	r := routes.SetupRoutes(app)
 	server := &http.Server{

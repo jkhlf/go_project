@@ -3,6 +3,7 @@ package app
 //housing = data
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -15,8 +16,10 @@ import (
 type Application struct {
 	Logger         *log.Logger
 	WorkoutHandler *api.WorkoutHandler
+	DB             *sql.DB
 }
 
+// AWS Secrets for DB in real Production
 // Pointer to the Application and error type, nil is error type
 func NewApplication() (*Application, error) {
 	pgDB, err := store.Open()
@@ -29,12 +32,12 @@ func NewApplication() (*Application, error) {
 	//stores will go here
 
 	//handlers will go here
-
 	workoutHandler := api.NewWorkoutHandler()
 
 	app := &Application{
 		Logger:         logger,
 		WorkoutHandler: workoutHandler,
+		DB:             pgDB,
 	}
 
 	return app, nil
