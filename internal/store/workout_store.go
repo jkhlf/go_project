@@ -4,7 +4,6 @@ import "database/sql"
 
 type Workout struct {
 	ID              int            `json:"id"`
-	UserID          int            `json:"user_id"`
 	Title           string         `json:"title"`
 	Description     string         `json:"description"`
 	DurationMinutes int            `json:"duration_minutes"`
@@ -34,7 +33,7 @@ func NewPostgresWorkoutStore(db *sql.DB) *PostgresWorkoutStore {
 //interfaces = methods signatures
 
 type WorkoutStore interface {
-	CreateWokout(*Workout) (*Workout, error)
+	CreateWorkout(*Workout) (*Workout, error)
 	GetWorkoutByID(id int64) (*Workout, error)
 }
 
@@ -47,12 +46,12 @@ func (pg *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error
 
 	query :=
 		`
-  INSERT INTO workouts (user_id, title, description, duration_minutes, calories_burned)
-  VALUES ($1, $2, $3, $4, $5)
+  INSERT INTO workouts (title, description, duration_minutes, calories_burned)
+  VALUES ($1, $2, $3, $4)
   RETURNING id 
   `
 
-	err = tx.QueryRow(query, workout.UserID, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned).Scan(&workout.ID)
+	err = tx.QueryRow(query, workout.Title, workout.Description, workout.DurationMinutes, workout.CaloriesBurned).Scan(&workout.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -75,5 +74,10 @@ func (pg *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error
 		return nil, err
 	}
 
+	return workout, nil
+}
+
+func (pg *PostgresWorkoutStore) GetWorkoutByID(id int64) (*Workout, error) {
+	workout := &Workout{}
 	return workout, nil
 }
