@@ -1,6 +1,6 @@
 module github.com/jkhf/go_project
 
-go 1.23.0
+go 1.23.2
 
 require github.com/go-chi/chi v1.5.5
 
