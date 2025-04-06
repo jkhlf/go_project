@@ -1,4 +1,5 @@
-version: '3.8'
+version: "3.8"
+
 services:
   db:
     container_name: "workoutDB"
@@ -12,3 +13,4 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
     restart: unless-stopped
+

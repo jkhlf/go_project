@@ -15,9 +15,8 @@ import (
 
 // panic is a self-destructive function that stops the program and prints the error message
 func main() {
-
 	var port int
-	flag.IntVar(&port, "port", 8080, "Port to run the server on")
+	flag.IntVar(&port, "port", 8080, "go backend server port")
 	flag.Parse()
 
 	app, err := app.NewApplication()
@@ -35,7 +34,7 @@ func main() {
 		WriteTimeout: 30 * time.Second,
 	}
 
-	app.Logger.Printf(("Runing app on port %d\n"), port)
+	app.Logger.Printf("we are running on port %d\n", port)
 
 	err = server.ListenAndServe()
 	if err != nil {
